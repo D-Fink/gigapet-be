@@ -17,7 +17,7 @@ const sessionConfig = {
         secret: process.env.SESSION_SECRET || 'yada yada yada',
         cookie: {
             maxAge: 1000 * 60 * 60,
-            secure: false, //true when pushed to production
+            secure: true, //true when pushed to production
             httpOnly: true,
         },
         resave: false,
