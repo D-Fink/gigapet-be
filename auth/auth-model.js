@@ -1,6 +1,7 @@
 const db = require('../data/dbConfig.js')
 
 module.exports = {
+    findPet,
     findPetById,
     createPet,
     updatePet,
@@ -8,6 +9,10 @@ module.exports = {
     addFood,
     updateFood,
     findFoodById
+}
+
+function findPet(id){
+    return db('pet').where('user_id', id)
 }
 
 function findPetById(id){

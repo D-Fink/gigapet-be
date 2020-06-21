@@ -4,7 +4,7 @@ const User = require('../users/users-model.js');
 
 //working
 router.post('/pet/', (req, res) => {
-    Auth.createPet({name: req.body.name, type: req.body.type, stage: req.body.stage, progress: req.body.progress, status: req.body.status, user_id: req.session.userId})
+    Auth.createPet({name: req.body.name, type: req.body.type, stage: req.body.stage, progress: req.body.progress, status: req.body.status, user_id: req.user.userId})
     .then(pet => {
         res.status(201).json(pet)
     })
@@ -28,7 +28,7 @@ router.delete('/pet/:id', (req, res) => {
 });
 //working
 router.get('/pet/', (req, res) => {
-    Auth.findPet(req.session.userId)
+    Auth.findPet(req.user.userId)
     .then(pet => {
         res.status(200).json(pet)
     })
