@@ -38,7 +38,7 @@ router.get('/pet/', (req, res) => {
 });
 
 router.get('/pet/:id', (req, res) => {
-    Auth.findPetById(id)
+    Auth.findPetById(req.params.id)
     .then(pet => {
         if (pet) {
             res.status(200).json(pet)
