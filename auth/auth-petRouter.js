@@ -37,6 +37,20 @@ router.get('/pet/', (req, res) => {
     })
 });
 
+router.get('/pet/:id', (req, res) => {
+    Auth.findPetById(id)
+    .then(pet => {
+        if (pet) {
+            res.status(200).json(pet)
+        } else {
+            res.status(404).json({message: 'pet could not be found'})
+        }
+    })
+    .catch(err => {
+        res.status(500).json({message: `error retrieving pet: ${err}`})
+    })
+})
+
 // food
 //working
 router.post('/pet/:id', (req, res) => {
@@ -64,7 +78,7 @@ router.put('/pet/:id', (req, res) => {
 })
 
 //working
-router.get('/pet/:id', (req, res) => {
+router.get('/pet/food/:id', (req, res) => {
     const id = req.params.id;
     Auth.findPetById(id)
     .then(pet => {
