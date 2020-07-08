@@ -83,7 +83,7 @@ router.get('/pet/food/:id', (req, res) => {
     Auth.findPetById(id)
     .then(pet => {
         if (pet.length > 0) {
-            Auth.findFood(pet[0].id).then(food => {
+            Auth.findFoodByPet(pet[0].id).then(food => {
                 res.status(200).json(food)
             })
         } else {

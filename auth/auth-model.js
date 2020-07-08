@@ -8,7 +8,7 @@ module.exports = {
     deletePet,
     addFood,
     updateFood,
-    findFoodById
+    findFoodByPet
 }
 
 function findPet(id){
@@ -19,8 +19,8 @@ function findPetById(id){
     return db('pet').where({id})
 }
 
-function findFoodById(id){
-    return db('food').where({id})
+function findFoodByPet(id){
+    return db('food').where('pet_id', id)
 }
 
 function createPet(pet, id){
