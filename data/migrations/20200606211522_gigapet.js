@@ -9,12 +9,12 @@ exports.up = async (knex, Promise) => {
     })
     .createTable('food', tbl => {
         tbl.increments();
-        tbl.integer('carbs').defaultTo(0).notNullable();
-        tbl.integer('fruits').defaultTo(0).notNullable();
-        tbl.integer('veggies').defaultTo(0).notNullable();
-        tbl.integer('dairy').defaultTo(0).notNullable();
-        tbl.integer('protein').defaultTo(0).notNullable();
-        tbl.integer('sweets').defaultTo(0).notNullable();
+        tbl.integer('carbs').defaultTo(0).nullable();
+        tbl.integer('fruits').defaultTo(0).nullable();
+        tbl.integer('veggies').defaultTo(0).nullable();
+        tbl.integer('dairy').defaultTo(0).nullable();
+        tbl.integer('protein').defaultTo(0).nullable();
+        tbl.integer('sweets').defaultTo(0).nullable();
         tbl.string('created_at').defaultTo(`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`);
         tbl.integer('pet_id')
         .unsigned()
