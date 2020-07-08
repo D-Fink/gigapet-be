@@ -23,6 +23,10 @@ function findFoodByPet(id){
     return db('food').where('pet_id', id)
 }
 
+function findFoodById(id){
+    return db('food').where({id})
+}
+
 function createPet(pet, id){
     return db('pet').insert(pet, 'id').then(([id]) => {return findPetById(id)})
 }
