@@ -91,7 +91,7 @@ router.get('/pet/food/:id', (req, res) => {
         }
     })
     .catch(err => {
-        res.status(500).json({message: 'error retrieving foods'})
+        res.status(500).json({message: `error retrieving foods: ${err}`})
     })
 })
 
