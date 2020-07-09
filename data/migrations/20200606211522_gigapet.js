@@ -7,6 +7,20 @@ exports.up = async (knex, Promise) => {
         tbl.string('password').notNullable();
         tbl.string('email').unique().notNullable();
     })
+    .createTable('pet', tbl => {
+        tbl.increments();
+        tbl.string('name').notNullable();
+        tbl.integer('type').notNullable();
+        tbl.integer('stage').notNullable();
+        tbl.integer('progress').notNullable();
+        tbl.integer('status').notNullable();
+        tbl.integer('user_id')
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
+    })
     .createTable('food', tbl => {
         tbl.increments();
         tbl.integer('carbs').defaultTo(0).nullable();
@@ -23,26 +37,12 @@ exports.up = async (knex, Promise) => {
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
     })
-    .createTable('pet', tbl => {
-        tbl.increments();
-        tbl.string('name').notNullable();
-        tbl.integer('type').notNullable();
-        tbl.integer('stage').notNullable();
-        tbl.integer('progress').notNullable();
-        tbl.integer('status').notNullable();
-        tbl.integer('user_id')
-        .unsigned()
-        .references('id')
-        .inTable('users')
-        .onUpdate('CASCADE')
-        .onDelete('CASCADE');
-    })
 };
 
 exports.down = async (knex, Promise) => {
     return knex.schema
-    .dropTableIfExists('pet')
     .dropTableIfExists('food')
+    .dropTableIfExists('pet')
     .dropTableIfExists('users')
   
 };
