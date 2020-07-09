@@ -54,7 +54,7 @@ router.get('/pet/:id', (req, res) => {
 // food
 //working
 router.post('/pet/:id', (req, res) => {
-    Auth.addFood({carbs: req.body.carbs, fruits: req.body.fruits, veggies: req.body.veggies, dairy: req.body.dairy, protein: req.body.protein, sweets: req.body.sweets, pet_id: req.params.id})
+    Auth.addFood({carbs: req.body.carbs, fruits: req.body.fruits, veggies: req.body.veggies, dairy: req.body.dairy, protein: req.body.protein, sweets: req.body.sweets, pet_id: req.params.id, created_at: req.body.created_at})
     .then(food => {
         res.status(201).json(food)
     })
