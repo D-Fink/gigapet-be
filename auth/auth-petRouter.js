@@ -13,6 +13,20 @@ router.post('/pet/', (req, res) => {
     })
 });
 
+router.put('/pet/:id', (req, res) => {
+    Auth.updatePet(req.params.id, req.body)
+    .then(pet => {
+        if(pet) {
+            res.status(200).json(pet)
+        } else {
+            res.status(404).json({message: 'pet could not be found'})
+        }
+    })
+    .catch(err => {
+        res.status(500).json({message: `error updating pet: ${err}`})
+    })
+})
+
 router.delete('/pet/:id', (req, res) => {
     Auth.deletePet(req.params.id)
     .then(count => {
@@ -53,7 +67,7 @@ router.get('/pet/:id', (req, res) => {
 
 // food
 //working
-router.post('/pet/:id', (req, res) => {
+router.post('/pet/food/:id', (req, res) => {
     Auth.addFood({carbs: req.body.carbs, fruits: req.body.fruits, veggies: req.body.veggies, dairy: req.body.dairy, protein: req.body.protein, sweets: req.body.sweets, pet_id: req.params.id, created_at: req.body.created_at})
     .then(food => {
         res.status(201).json(food)
@@ -63,7 +77,7 @@ router.post('/pet/:id', (req, res) => {
     })
 })
 
-router.put('/pet/:id', (req, res) => {
+router.put('/pet/food/:id', (req, res) => {
     Auth.updateFood(req.params.id, req.body)
     .then(food => {
         if(food) {
