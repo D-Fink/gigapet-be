@@ -2,12 +2,17 @@ const router = require('express').Router();
 const Auth = require('./auth-model.js');
 const User = require('../users/users-model.js');
 
+let d = new Date()
+const getDate = () => {
+    return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
+}
+
 //working
 router.post('/pet/', (req, res) => {
     Auth.createPet({name: req.body.name, type: req.body.type, stage: req.body.stage, progress: req.body.progress, status: req.body.status, user_id: req.user.userId})
     .then(pet => {
         res.status(201).json(pet)
-        Auth.addFood({carbs: req.body.carbs, fruits: req.body.fruits, veggies: req.body.veggies, dairy: req.body.dairy, protein: req.body.protein, sweets: req.body.sweets, pet_id: pet.id, created_at: req.body.created_at})
+        Auth.addFood({carbs: 0, fruits: 0, veggies: 0, dairy: 0, protein: 0, sweets: 0, pet_id: pet.id, created_at: {getDate()}})
         .then(food => {
             res.status(201).json(food)
         })

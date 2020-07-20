@@ -1,4 +1,7 @@
 let d = new Date()
+const getDate = () => {
+    return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
+}
 
 exports.up = async (knex, Promise) => {
     return knex.schema.createTable('users', tbl => {
@@ -29,7 +32,7 @@ exports.up = async (knex, Promise) => {
         tbl.integer('dairy').defaultTo(0).nullable();
         tbl.integer('protein').defaultTo(0).nullable();
         tbl.integer('sweets').defaultTo(0).nullable();
-        tbl.string('created_at').defaultTo(`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`);
+        tbl.string('created_at').defaultTo({getDate()});
         tbl.integer('pet_id')
         .unsigned()
         .references('id')
