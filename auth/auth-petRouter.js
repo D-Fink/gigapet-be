@@ -11,9 +11,8 @@ const getDate = () => {
 router.post('/pet/', (req, res) => {
     Auth.createPet({name: req.body.name, type: req.body.type, stage: req.body.stage, progress: req.body.progress, status: req.body.status, user_id: req.user.userId})
     .then(pet => {
-        let petId = pet[0].id
         res.status(201).json(pet)
-        Auth.addFood({carbs: 0, fruits: 0, veggies: 0, dairy: 0, protein: 0, sweets: 0, pet_id: petId, created_at: getDate()})
+        Auth.addFood({carbs: 0, fruits: 0, veggies: 0, dairy: 0, protein: 0, sweets: 0, pet_id: pet[0].id, created_at: getDate()})
         .then(food => {
             res.status(201).json(food)
         })
