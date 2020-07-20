@@ -7,6 +7,13 @@ router.post('/pet/', (req, res) => {
     Auth.createPet({name: req.body.name, type: req.body.type, stage: req.body.stage, progress: req.body.progress, status: req.body.status, user_id: req.user.userId})
     .then(pet => {
         res.status(201).json(pet)
+        Auth.addFood({carbs: req.body.carbs, fruits: req.body.fruits, veggies: req.body.veggies, dairy: req.body.dairy, protein: req.body.protein, sweets: req.body.sweets, pet_id: pet.id, created_at: req.body.created_at})
+        .then(food => {
+            res.status(201).json(food)
+        })
+        .catch(err => {
+            res.status(500).json({message: `error adding food: ${err}`})
+        })
     })
     .catch(err => {
         res.status(500).json({message: `error creating pet ${err}`})
